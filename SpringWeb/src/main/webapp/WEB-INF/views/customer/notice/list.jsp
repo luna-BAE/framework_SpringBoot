@@ -36,23 +36,23 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th class="w60">번호</th>
-							<th class="expand">제목</th>
-							<th class="w100">작성자</th>
+							<th class="w60">학번</th>
+							<th class="expand">이름</th>
+							<th class="w100">전화번호</th>
 							<th class="w100">작성일</th>
-							<th class="w60">조회수</th>
+							<th class="w60">강의번호</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="n" items="${list }">	
 						<tr>
-							<td>${n.deptno }번</td>
-							<td class="title indent text-align-left"><a href="detail.html">${n.dname }</a></td>
-							<td>newlec</td>
+							<td>${n.stuNo }번</td>
+							<td class="title indent text-align-left"><a href="detail.html">${n.stuName }</a></td>
+							<td>${n.stuPhone }</td>
 							<td>
 								2019-08-18		
 							</td>
-							<td>146</td>
+							<td>${n.lecName }</td>
 						</tr>
 						</c:forEach>
 					</tbody>

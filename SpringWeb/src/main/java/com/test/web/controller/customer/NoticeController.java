@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.test.web.entity.Notice;
+import com.test.web.entity.NoticeView;
 import com.test.web.service.NoticeService;
 
 @Controller
@@ -22,7 +23,7 @@ public class NoticeController {
 	@RequestMapping("list") 
 	public String list(Model model) { // 여기에 모델 객체를 만들기만 하면 스프링이 알아서 모델 객체를 참조시켜줌
 		
-		List<Notice> list = service.getList();
+		List<NoticeView> list = service.getList();
 		model.addAttribute("list", list);
 		
 		// return "customer/notice/list"; // ResourceViewResolver
