@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 여기서 dtd는 태그를 사용할 수 있는 문서를 정의하고 있는 것 -->
+<mapper namespace="com.test.web.dao.NoticeDao">
+  <select id="getList" resultType="com.test.web.entity.NoticeView">
+    select * from studentView 
+    where ${field} like '%${query}%' 
+    order by stuNo desc 
+    limit #{offset}, #{size}
+  </select>
+  
+  <select id="getCount">
+    select count(stuNo) count from student 
+    where ${field} like '%${query}%' 
+  </select>
+  
+  <select id="getView" resultType="com.test.web.entity.NoticeView">
+  	select * from studentView 
+    where = #{stuNo}
+  </select>
+  
+  <select id="getNext" resultType="com.test.web.entity.Notice">
+  	select * from student
+	where stuNo &gt; (select stuNo from student where stuNo= #{stuNo})
+	limit 1
+  </select>
+  
+  <select id="getPrev" resultType="com.test.web.entity.Notice">
+  	select * from student
+	where stuNo &lt; (select stuNo from student where stuNo= #{stuNo})
+	order by stuNo desc
+	limit 1
+  </select>
+  
+  <update id="update" parameterType="com.test.web.entity.Notice">
+  	update
+  	set
+  	stuName = #{stuName},
+  	stuPhone = #{stuPhone}
+  	where stuNo = #{stuNo}
+  </update>
+  
+  <insert id="insert" parameterType="com.test.web.entity.Notice">
+  	insert into student(stuName, stuPhone, lecNo)
+  	values(#{stuName}, #{stuPhone}, #{lecNo})
+  </insert>
+  
+  <delete id="delete">
+  	delete from student
+  	where stuNo = #{stuNo}
+  </delete>
+  
+  <delete id="deleteAll">
+  	delete from student
+  	where stuNo in
+  	  <foreach item="stuNo" index="index" collection="ids"
+	      open="(" separator="," close=")">
+	        #{stuNo}
+	  </foreach>
+  </delete>
+  
+  <update id="updatePubsAll">
+  	update student
+  	set
+  	pub = #{pub}
+  	where stuNo in
+  	<foreach item="stuNo" index="index" collection="ids"
+	      open="(" separator="," close=")">
+	        #{stuNo}
+	  </foreach>
+  	<!-- update student
+  	set
+  	pub = case id
+  	 <foreach item="stuNo" collection="pubIds">
+  	 	when #{stuNo} then 1
+  	 </foreach>
+  	 <foreach item="stuNo" collection="closeIds">
+  	 	when #{stuNo} then 0
+  	 </foreach>
+  	where stuNo in(
+  	 <foreach item="stuNo" collection="pubIds">
+  	 	{id}
+  	 </foreach>
+  	 ,
+  	 <foreach item="stuNo" collection="closeIds">
+  	 	#{id}
+  	 </foreach>
+  	) -->
+  </update>
+  
+</mapper>

@@ -27,7 +27,7 @@ public class NoticeController {
 		String field = "stuNo";
 		String query = "";
 		
-		List<NoticeView> list = service.getList(page, field, query);
+		List<NoticeView> list = service.getViewList(page, field, query);
 		model.addAttribute("list", list);
 		
 		// return "customer/notice/list"; // ResourceViewResolver

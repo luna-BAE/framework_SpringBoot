@@ -19,7 +19,7 @@ public class NoticeController {
 	@RequestMapping("list")
 	public String list() {
 		
-		List<Notice> list = service.getList();
+		List<Notice> list = service.getViewList();
 		
 		return "admin.board.notice.list";
 		
@@ -28,7 +28,7 @@ public class NoticeController {
 	@RequestMapping("detail")
 	public String detail() {
 		
-		Notice notice = service.get(1);
+		Notice notice = service.getView(1);
 		
 		return "admin.board.notice.detail";
 	}
