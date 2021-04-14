@@ -5,31 +5,28 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-  <definition name="home.*" template="/WEB-INF/views/inc/layout.jsp">
+  <definition name="layout.common" template="/WEB-INF/views/inc/layout.jsp">
     <put-attribute name="title" value="Tiles tutorial homepage" />
     <put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
-    <put-attribute name="main" value="/WEB-INF/views/{1}.jsp" />
     <put-attribute name="footer" value="/WEB-INF/views/inc/footer.jsp" />
+  </definition>
+
+  <definition name="home.*" extends="layout.common">
+    <put-attribute name="main" value="/WEB-INF/views/{1}.jsp" />
   </definition>
 
 <!-- customer의 tiles -->
-  <definition name="customer.*.*" template="/WEB-INF/views/customer/inc/layout.jsp">
-    <put-attribute name="title" value="Tiles tutorial homepage" />
-    <put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
+  <definition name="customer.*.*" template="/WEB-INF/views/customer/inc/layout.jsp"  extends="layout.common">
     <put-attribute name="aside" value="/WEB-INF/views/customer/inc/aside.jsp" />
     <put-attribute name="visual" value="/WEB-INF/views/customer/inc/visual.jsp" />
     <put-attribute name="main" value="/WEB-INF/views/customer/{1}/{2}.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/views/inc/footer.jsp" />
   </definition>
 
 <!-- admin의 tiles -->
-  <definition name="admin.*.*.*" template="/WEB-INF/views/admin/inc/layout.jsp">
-    <put-attribute name="title" value="Tiles tutorial homepage" />
-    <put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
+  <definition name="admin.*.*.*" template="/WEB-INF/views/admin/inc/layout.jsp" extends="layout.common">
     <put-attribute name="aside" value="/WEB-INF/views/admin/inc/aside.jsp" />
     <put-attribute name="visual" value="/WEB-INF/views/admin/inc/visual.jsp" />
     <put-attribute name="main" value="/WEB-INF/views/admin/{1}/{2}/{3}.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/views/inc/footer.jsp" />
   </definition>
   
 
