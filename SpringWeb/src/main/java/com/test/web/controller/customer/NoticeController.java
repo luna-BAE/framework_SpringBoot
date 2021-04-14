@@ -23,7 +23,11 @@ public class NoticeController {
 	@RequestMapping("list") 
 	public String list(Model model) { // 여기에 모델 객체를 만들기만 하면 스프링이 알아서 모델 객체를 참조시켜줌
 		
-		List<NoticeView> list = service.getList();
+		int page = 2;
+		String field = "stuNo";
+		String query = "";
+		
+		List<NoticeView> list = service.getList(page, field, query);
 		model.addAttribute("list", list);
 		
 		// return "customer/notice/list"; // ResourceViewResolver
