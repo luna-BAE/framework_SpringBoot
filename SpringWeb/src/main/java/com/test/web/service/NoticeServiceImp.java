@@ -16,25 +16,25 @@ public class NoticeServiceImp implements NoticeService{
 	private NoticeDao noticeDao;
 
 	@Override
-	public List<NoticeView> getViewList() {
+	public List<NoticeView> getViewList(boolean pub) {
 		// TODO Auto-generated method stub
-		return getViewList(1, "stuNo", "");
+		return getViewList(1, "stuNo", "", pub);
 	}
 
 	@Override
-	public List<NoticeView> getViewList(String field, String query) {
+	public List<NoticeView> getViewList(String field, String query, boolean pub) {
 		// TODO Auto-generated method stub
-		return getViewList(1, field, query);
+		return getViewList(1, field, query, pub);
 	}
 
 	
 	@Override
-	public List<NoticeView> getViewList(int page, String field, String query) {
+	public List<NoticeView> getViewList(int page, String field, String query, boolean pub) {
 		
 		int size = 10;
 		int offset = 0+(page-1)*10; // 공차수열
 		
-		List<NoticeView> list = noticeDao.getViewList(offset, size, field, query);
+		List<NoticeView> list = noticeDao.getViewList(offset, size, field, query, pub);
 		
 		return list;
 	}
@@ -72,8 +72,10 @@ public class NoticeServiceImp implements NoticeService{
 
 	@Override
 	public int updatePubAll(int[] pubIds, int[] closeIds) {
-		// TODO Auto-generated method stub
-		return noticeDao.updatePubsAll(pubIds, closeIds);
+		int result = 0;
+		result += noticeDao.updatePubsAll(pubIds, true);
+		result += noticeDao.updatePubsAll(pubIds, false);
+		return result;
 	}
 
 	@Override

@@ -16,7 +16,7 @@
 	limit #{offset}, #{size}
   </select>
   
-  <select id="getCount">
+  <select id="getCount" resultType="int">
     select count(stuNo) count from student 
     where ${field} like '%${query}%' 
   </select>

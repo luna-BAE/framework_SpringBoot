@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Select;
 import com.test.web.entity.Notice;
 import com.test.web.entity.NoticeView;
 
-@Mapper
 public interface NoticeDao {
 	
 	/*
