@@ -4,11 +4,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 여기서 dtd는 태그를 사용할 수 있는 문서를 정의하고 있는 것 -->
 <mapper namespace="com.test.web.dao.NoticeDao">
-  <select id="getList" resultType="com.test.web.entity.NoticeView">
+  <select id="getViewList" resultType="com.test.web.entity.NoticeView">
     select * from studentView 
-    where ${field} like '%${query}%' 
-    order by stuNo desc 
-    limit #{offset}, #{size}
+    <where>
+	   <if test = "query != null or query !=''">
+    		${field} like '%${query}%'
+		</if>
+	    and pub = #{pub}
+    </where>
+	order by stuNo desc 
+	limit #{offset}, #{size}
   </select>
   
   <select id="getCount">
